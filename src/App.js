@@ -29,8 +29,9 @@ function App() {
     };
     auth(authData)
       .then((res) => {
+        console.log(res);
         if (res.data.code === 1000) {
-          console.log("token", res.data.data);
+          console.log("Bearer", res.data.data);
           save(saveData, res.data.data)
             .then((res) => {
               console.log(res);
@@ -53,7 +54,6 @@ function App() {
         </label>
         <button type="submit">전송</button>
       </form>
-      {/* <p>{responseMsg}</p> */}
     </div>
   );
 }
