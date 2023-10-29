@@ -27,6 +27,8 @@ function App() {
     const saveData = {
       teamName: teamName,
     };
+    const authRes = await auth(authData);
+    console.log("authRes : ", authRes);
     auth(authData)
       .then((res) => {
         console.log(res);
@@ -45,6 +47,7 @@ function App() {
         console.log("Error : ", e);
       });
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
