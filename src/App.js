@@ -19,44 +19,27 @@ function App() {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const authData = {
-      message: teamName,
-      authHash: generateAuthHash(),
-    };
-    const saveData = {
-      teamName: teamName,
-    };
-    const authRes = await auth(authData);
-    console.log("authRes : ", authRes);
-    auth(authData)
-      .then((res) => {
-        console.log(res);
-        if (res.data.code === 1000) {
-          console.log("Bearer", res.data.data);
-          save(saveData, res.data.data)
-            .then((res) => {
-              console.log(res);
-            })
-            .catch((e) => {
-              console.log("Error : ", e);
-            });
-        }
-      })
-      .catch((e) => {
-        console.log("Error : ", e);
-      });
+    // event.preventDefault();
+    try{
+      const saveData = {
+        teamName: teamName,
+      };
+      const authRes = await auth({teamName: teamName});
+      console.log("authRes : ", authRes);
+      const d = await save(saveData, authRes.data.data)
+    } catch(e){
+      console.log(e);
+    }
+  
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <label>
           팀명:
           <input type="text" value={teamName} onChange={handleInputChange} />
         </label>
-        <button type="submit">전송</button>
-      </form>
+        <button onClick={handleSubmit}>전송</button>
     </div>
   );
 }

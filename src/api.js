@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://kafka.suitestudy.com:8000",
+  baseURL: "http://kafka.suitestudy.com:8000/",
 });
 
 export const auth = (data) => api.post("/auth", data);
